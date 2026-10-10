@@ -1,17 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="小镇梦想家 banner">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="小镇梦想家 · 终端风 banner">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#022c22" />
-      <stop offset="45%" stop-color="#0f766e" />
-      <stop offset="100%" stop-color="#1d4ed8" />
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0H0V50" fill="none" stroke="rgba(201,232,148,0.075)" stroke-width="1" />
+    </pattern>
+    <radialGradient id="glow" cx="26%" cy="38%" r="64%">
+      <stop offset="0%" stop-color="rgba(201,232,148,0.18)" />
+      <stop offset="55%" stop-color="rgba(201,232,148,0.035)" />
+      <stop offset="100%" stop-color="rgba(201,232,148,0)" />
+    </radialGradient>
+    <linearGradient id="fade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(13,16,15,0)" />
+      <stop offset="100%" stop-color="rgba(13,16,15,0.9)" />
+    </linearGradient>
+    <linearGradient id="rule" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(201,232,148,0.45)" />
+      <stop offset="45%" stop-color="rgba(201,232,148,0.10)" />
+      <stop offset="100%" stop-color="rgba(201,232,148,0)" />
     </linearGradient>
   </defs>
-  <rect width="1600" height="900" fill="url(#grad)" />
-  <circle cx="1180" cy="180" r="180" fill="rgba(255,255,255,0.08)" />
-  <circle cx="1420" cy="720" r="220" fill="rgba(255,255,255,0.08)" />
-  <circle cx="320" cy="760" r="280" fill="rgba(255,255,255,0.06)" />
-  <path d="M0 690c170-90 330-130 480-120 150 10 320 70 470 58 146-12 267-72 650-214v486H0z" fill="rgba(2,6,23,0.28)" />
-  <text x="120" y="350" font-size="118" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#ffffff">小镇梦想家</text>
-  <text x="126" y="438" font-size="34" font-family="Segoe UI, Arial, sans-serif" fill="rgba(255,255,255,0.86)">Hexo + Butterfly Blog</text>
-  <text x="126" y="506" font-size="28" font-family="Segoe UI, Arial, sans-serif" fill="rgba(255,255,255,0.74)">记录技术、折腾与成长</text>
+
+  <rect width="1600" height="900" fill="#0d100f" />
+  <rect width="1600" height="900" fill="url(#grid)" />
+  <rect width="1600" height="900" fill="url(#glow)" />
+
+  <text x="1150" y="800" font-family="'JetBrains Mono', ui-monospace, Consolas, monospace"
+        font-size="300" font-weight="700" fill="rgba(201,232,148,0.10)">&#62;_</text>
+
+  <rect x="120" y="132" width="360" height="1" fill="url(#rule)" />
+
+  <rect width="1600" height="900" fill="url(#fade)" />
 </svg>

@@ -13,7 +13,7 @@ menu:
 social:
   fab fa-github: https://github.com/BeiZzzzz || GitHub || '#24292e'
 
-favicon: /img/avatar.jpg
+favicon: /img/favicon-terminal.svg
 
 avatar:
   img: /img/avatar.jpg
@@ -34,6 +34,7 @@ subtitle:
 
 code_blocks:
   theme: darker
+  macStyle: true
   copy: true
   language: true
   shrink: false
@@ -81,7 +82,8 @@ aside:
       text: GitHub
       link: https://github.com/BeiZzzzz
   card_announcement:
-    enable: true
+    # 侧栏已由 source/_data/widget.yml 的仿终端卡片承载欢迎信息，这里关闭避免重复
+    enable: false
     content: 欢迎来到 小镇梦想家，这里会持续更新技术学习与实践记录。
   card_recent_post:
     enable: true
@@ -150,21 +152,22 @@ comments:
 
 theme_color:
   enable: true
-  main: "#0f766e"
-  paginator: "#0ea5a4"
-  button_hover: "#f97316"
-  text_selection: "#0ea5a4"
-  link_color: "#2563eb"
-  meta_color: "#64748b"
-  hr_color: "#67e8f9"
-  code_foreground: "#f97316"
-  code_background: "rgba(15, 23, 42, 0.85)"
-  toc_color: "#0ea5a4"
-  blockquote_padding_color: "#0ea5a4"
-  blockquote_background_color: "#ecfeff"
-  scrollbar_color: "#0f766e"
-  meta_theme_color_light: "#f5f7fb"
-  meta_theme_color_dark: "#0f172a"
+  # 终端风配色：信号绿主色 + 近黑底
+  main: "#c9e894"
+  paginator: "#8ab4ff"
+  button_hover: "#c9e894"
+  text_selection: "#c9e894"
+  link_color: "#8ab4ff"
+  meta_color: "#7d8781"
+  hr_color: "#272d29"
+  code_foreground: "#c9e894"
+  code_background: "rgba(11, 14, 12, 0.9)"
+  toc_color: "#c9e894"
+  blockquote_padding_color: "#c9e894"
+  blockquote_background_color: "#141816"
+  scrollbar_color: "#3a423c"
+  meta_theme_color_light: "#f2f5ef"
+  meta_theme_color_dark: "#0d100f"
 
 rounded_corners_ui: true
 
@@ -173,7 +176,14 @@ preloader:
   source: 1
 
 enter_transitions: true
-display_mode: light
+# 终端审美默认深色；右上角按钮仍可切回浅色版
+display_mode: dark
+
+font:
+  global_font_size: 15px
+  code_font_size: 13px
+  font_family: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif"
+  code_font_family: "'JetBrains Mono', ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace"
 
 lightbox: medium_zoom
 
@@ -209,19 +219,14 @@ structured_data:
     - 小镇梦想家 Blog
     - 小镇梦想家 技术博客
 
-# video background injection (ink warrior)
+# 页脚状态行（终端风）
+footer:
+  custom_text: '<span class="term-status">SYSTEM STATUS: <em>ONLINE</em></span>'
+
+# 终端风皮肤：自定义样式表 + 背景字符雨脚本
+# 注意：这里的路径包含站点 root（/xzmxj/），若仓库改名需同步修改
 inject:
   head:
-    - |
-      <style>
-      #bg-video-wrap{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:#0d1722}
-      #bg-video-wrap video{width:100%;height:100%;object-fit:cover}
-      #bg-video-wrap::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.35)}
-      html,body{background:transparent!important}
-      #web_bg{background:transparent!important}
-      :root{--card-bg:rgba(255,255,255,.40)!important}
-      html[data-theme='dark']{--card-bg:rgba(10,18,28,.55)!important}
-      </style>
+    - <link rel="stylesheet" href="/xzmxj/css/terminal.css">
   bottom:
-    - |
-      <div id="bg-video-wrap"><video src="/xzmxj/img/ink-warrior.mp4" autoplay muted loop playsinline></video></div>
+    - <script src="/xzmxj/js/terminal-bg.js" defer></script>

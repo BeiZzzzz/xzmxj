@@ -1,0 +1,1132 @@
+/* ==========================================================================
+   小镇梦想家 · Terminal / Tech skin for Hexo Butterfly
+   --------------------------------------------------------------------------
+   设计参考：n0ther3.github.io（近黑底 + 信号绿 + 等宽终端组件 + 克制动效）
+   实现方式：仅通过 CSS 变量与选择器覆盖，不改动主题源码。
+   令牌取自参考站，可直接对照调整。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 设计令牌
+   -------------------------------------------------------------------------- */
+:root {
+  --t-bg: #f2f5ef;
+  --t-panel: #fbfcfa;
+  --t-panel-deep: #edf1ea;
+  --t-line: #dde3db;
+  --t-line-strong: #c2ccc2;
+  --t-text: #1d241f;
+  --t-text-bright: #10160f;
+  --t-text-soft: #3c443d;
+  --t-dim: #6b766d;
+  --t-accent: #47792b;
+  --t-accent-soft: rgba(71, 121, 43, 0.12);
+  --t-accent-glow: rgba(71, 121, 43, 0.28);
+  --t-path: #3b6fd4;
+  --t-err: #c04a4a;
+  --t-nav-bg: rgba(242, 245, 239, 0.86);
+  --t-nav-over: rgba(232, 236, 233, 0.88);
+  /* 落在强调色底上的文字色 */
+  --t-on-accent: #f7fbf5;
+
+  --t-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo,
+    Consolas, 'Liberation Mono', monospace;
+  --t-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+
+  --t-dot-r: #ff5f57;
+  --t-dot-y: #febc2e;
+  --t-dot-g: #28c840;
+}
+
+html[data-theme='dark'] {
+  --t-bg: #0d100f;
+  --t-panel: #141816;
+  --t-panel-deep: #0b0e0c;
+  --t-line: #272d29;
+  --t-line-strong: #3a423c;
+  --t-text: #e8ece9;
+  --t-text-bright: #f7f5f3;
+  --t-text-soft: #c5cbc8;
+  --t-dim: #7d8781;
+  --t-accent: #c9e894;
+  --t-accent-soft: rgba(201, 232, 148, 0.14);
+  --t-accent-glow: rgba(201, 232, 148, 0.35);
+  --t-path: #8ab4ff;
+  --t-err: #ff7a7a;
+  --t-nav-bg: rgba(13, 16, 15, 0.82);
+  --t-nav-over: rgba(232, 236, 233, 0.88);
+  --t-on-accent: #10130f;
+}
+
+/* --------------------------------------------------------------------------
+   2. 覆盖 Butterfly 自身变量（浅色 / 深色两套）
+   -------------------------------------------------------------------------- */
+:root {
+  --global-bg: transparent;
+  --font-color: var(--t-text);
+  --hr-border: var(--t-line);
+  --hr-before-color: var(--t-line-strong);
+  --search-bg: var(--t-panel-deep);
+  --search-input-color: var(--t-text);
+  --search-a-color: var(--t-text);
+  --preloader-bg: var(--t-bg);
+  --preloader-color: var(--t-accent);
+  --tab-border-color: var(--t-line);
+  --tab-button-bg: var(--t-panel-deep);
+  --tab-button-color: var(--t-text-soft);
+  --tab-button-hover-bg: var(--t-line);
+  --tab-button-active-bg: var(--t-panel);
+  --card-bg: var(--t-panel);
+  --card-meta: var(--t-dim);
+  --sidebar-bg: var(--t-panel);
+  --sidebar-menu-bg: var(--t-panel);
+  --btn-bg: var(--t-accent);
+  --btn-color: var(--t-on-accent);
+  --btn-hover-color: var(--t-accent);
+  --text-bg-hover: var(--t-accent-soft);
+  --light-grey: var(--t-line);
+  --dark-grey: var(--t-line-strong);
+  --text-highlight-color: var(--t-text-bright);
+  --blockquote-color: var(--t-text-soft);
+  --blockquote-bg: var(--t-accent-soft);
+  --reward-pop: var(--t-panel-deep);
+  --toc-link-color: var(--t-dim);
+  --card-box-shadow: none;
+  --card-hover-box-shadow: none;
+  --pseudo-hover: var(--t-accent);
+  --headline-presudo: var(--t-accent);
+  --scrollbar-color: var(--t-line-strong);
+  --default-bg-color: var(--t-panel-deep);
+  --zoom-bg: var(--t-bg);
+  --mark-bg: var(--t-accent-soft);
+}
+
+html[data-theme='dark'] {
+  --global-bg: transparent;
+  --font-color: var(--t-text);
+  --search-bg: var(--t-panel-deep);
+  --search-input-color: var(--t-text);
+  --search-a-color: var(--t-text);
+  --preloader-bg: var(--t-bg);
+  --tab-border-color: var(--t-line);
+  --tab-button-bg: var(--t-panel-deep);
+  --tab-button-color: var(--t-text-soft);
+  --tab-button-hover-bg: var(--t-line);
+  --tab-button-active-bg: var(--t-panel);
+  --card-bg: var(--t-panel);
+  --sidebar-bg: var(--t-panel);
+  --sidebar-menu-bg: var(--t-panel);
+  --btn-hover-color: var(--t-accent);
+  --btn-color: var(--t-on-accent);
+  --btn-bg: var(--t-accent);
+  --text-bg-hover: var(--t-accent-soft);
+  --light-grey: var(--t-line);
+  --dark-grey: var(--t-line-strong);
+  --text-highlight-color: var(--t-text-bright);
+  --blockquote-color: var(--t-text-soft);
+  --blockquote-bg: var(--t-accent-soft);
+  --reward-pop: var(--t-panel-deep);
+  --toc-link-color: var(--t-dim);
+  --timeline-bg: var(--t-panel-deep);
+  --zoom-bg: var(--t-bg);
+  --mark-bg: var(--t-accent-soft);
+  --hl-bg: var(--t-panel-deep);
+  --hltools-bg: var(--t-panel-deep);
+  --hltools-color: var(--t-dim);
+  --hlnumber-bg: var(--t-panel-deep);
+  --hlexpand-bg: linear-gradient(180deg, rgba(11, 14, 12, 0.6), rgba(11, 14, 12, 0.9));
+}
+
+/* --------------------------------------------------------------------------
+   3. 背景层：近黑底 + 极淡字符雨 + 静态光晕
+   -------------------------------------------------------------------------- */
+html {
+  background: var(--t-bg);
+}
+
+body,
+#web_bg {
+  background: transparent !important;
+  font-family: var(--t-sans);
+  font-size: 15px;
+  color: var(--t-text);
+}
+
+/* Butterfly 水印层 / 旧视频层统一移除 */
+#bg-video-wrap {
+  display: none !important;
+}
+
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle at 24% 28%,
+    var(--t-accent-soft),
+    transparent 58%
+  );
+}
+
+::selection {
+  background: var(--t-accent);
+  color: var(--t-on-accent);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--t-line-strong);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--t-accent);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   4. 顶栏与导航
+   -------------------------------------------------------------------------- */
+#nav {
+  background: transparent;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+#page-header.nav-fixed #nav,
+#page-header.not-top-img #nav,
+html[data-theme='dark'] #page-header.nav-fixed > #nav,
+html[data-theme='dark'] #page-header.not-top-img > #nav {
+  background: var(--t-nav-bg);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--t-line);
+  box-shadow: none;
+}
+
+#nav #blog-info .site-name,
+#nav #menus .site-page {
+  font-family: var(--t-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+/* 顶部图标：方形 + 细边框 + 终端感 */
+#nav #blog-info img.site-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1px solid var(--t-line-strong);
+  object-fit: cover;
+}
+
+/* 品牌名前的终端提示符 */
+#nav #blog-info .nav-site-title::before {
+  content: '>_';
+  margin-right: 8px;
+  font-family: var(--t-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--t-accent);
+  letter-spacing: -0.06em;
+}
+
+#page-header:not(.nav-fixed) #nav #blog-info .site-name,
+#page-header:not(.nav-fixed) #nav #menus .site-page {
+  color: var(--t-nav-over);
+}
+
+#page-header:not(.nav-fixed) #nav #blog-info .nav-site-title:hover .site-name,
+#page-header:not(.nav-fixed) #nav #menus .site-page:hover {
+  color: var(--t-accent);
+}
+
+#nav #menus .site-page {
+  color: var(--t-text-soft);
+  transition: color 0.2s ease;
+}
+
+#nav #menus .site-page:hover,
+#nav #menus .site-page.active {
+  color: var(--t-accent);
+}
+
+/* 当前导航项：1px 发光下划线 */
+#nav #menus .menus_item > a.site-page {
+  position: relative;
+}
+
+#nav #menus .menus_item > a.site-page:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: var(--t-accent);
+  box-shadow: 0 0 8px var(--t-accent-glow);
+  transition: width 0.25s ease;
+}
+
+#nav #menus .menus_item > a.site-page:hover:after,
+#nav #menus .menus_item > a.site-page.active:after {
+  width: 100%;
+}
+
+#nav #menus .menus_item_child {
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px -16px rgba(0, 0, 0, 0.6);
+}
+
+#nav #search-button {
+  font-family: var(--t-mono);
+  letter-spacing: 0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   5. 首页 / 页面头部
+   -------------------------------------------------------------------------- */
+#page-header.full_page #site-info,
+#page-header.full_page #page-site-info {
+  text-align: center;
+}
+
+#page-header #site-title {
+  font-family: var(--t-mono);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  /* banner 底图恒为深色，两种主题下都强制用亮色文字 */
+  color: #e8ece9;
+  text-shadow: 0 0 24px var(--t-accent-glow), 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+#site-title::before {
+  content: '>_';
+  margin-right: 12px;
+  color: var(--t-accent);
+  font-size: 0.7em;
+  letter-spacing: -0.06em;
+  vertical-align: 0.08em;
+}
+
+#page-header #site-subtitle,
+#subtitle {
+  font-family: var(--t-mono);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--t-accent);
+}
+
+#page-header.full_page #scroll-down,
+#page-header #scroll-down .scroll-down-effects {
+  color: var(--t-accent);
+}
+
+/* 文章页头部：标题 + 元信息 */
+#post-info .post-title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   6. 首页文章卡片
+   -------------------------------------------------------------------------- */
+#recent-posts .recent-post-item {
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  border-radius: 10px;
+  box-shadow: none;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+#recent-posts .recent-post-item:hover {
+  border-color: var(--t-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px -20px var(--t-accent-glow);
+}
+
+#recent-posts .recent-post-item .post_cover img.post-bg {
+  filter: saturate(0.9) contrast(1.02);
+}
+
+#recent-posts .recent-post-item:hover .post_cover img.post-bg {
+  filter: saturate(1.02) contrast(1.05);
+}
+
+#recent-posts .recent-post-item .article-title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+#recent-posts .recent-post-item:hover .article-title {
+  color: var(--t-accent);
+}
+
+#recent-posts .recent-post-item .article-title .sticky {
+  color: var(--t-accent);
+}
+
+#recent-posts .recent-post-item .content {
+  color: var(--t-dim);
+  font-size: 14px;
+}
+
+/* 元信息统一等宽 */
+.article-meta-wrap,
+#post-meta {
+  font-family: var(--t-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--t-dim);
+}
+
+.article-meta-wrap a,
+.article-meta-wrap a.article-meta__categories,
+.article-meta-wrap a.article-meta__tags {
+  color: var(--t-dim);
+}
+
+.article-meta-wrap a:hover,
+.article-meta-wrap a.article-meta__categories:hover,
+.article-meta-wrap a.article-meta__tags:hover {
+  color: var(--t-accent);
+}
+
+.article-meta-label,
+.post-meta-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* --------------------------------------------------------------------------
+   7. 正文排版
+   -------------------------------------------------------------------------- */
+#article-container {
+  font-size: 15.5px;
+  line-height: 1.95;
+}
+
+#article-container a {
+  color: var(--t-path);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+#article-container a:hover {
+  color: var(--t-accent);
+}
+
+/* 标题前缀改为等宽 # / ## / ### ，替换主题的字体图标 */
+#article-container h1:before,
+#article-container h2:before,
+#article-container h3:before,
+#article-container h4:before,
+#article-container h5:before,
+#article-container h6:before {
+  font-family: var(--t-mono) !important;
+  font-weight: 500;
+  color: var(--t-accent);
+  top: 50%;
+  transform: translateY(-50%);
+  letter-spacing: -0.06em;
+}
+
+#article-container h1:before {
+  content: '# ';
+  font-size: 0.6em;
+}
+
+#article-container h2:before {
+  content: '# ';
+  font-size: 0.62em;
+}
+
+#article-container h3:before {
+  content: '## ';
+  font-size: 0.6em;
+}
+
+#article-container h4:before {
+  content: '### ';
+  font-size: 0.58em;
+}
+
+#article-container h5:before,
+#article-container h6:before {
+  content: '#### ';
+  font-size: 0.54em;
+}
+
+#article-container h1,
+#article-container h2,
+#article-container h3,
+#article-container h4 {
+  letter-spacing: -0.01em;
+}
+
+/* 引用块：左侧强调色竖条 */
+#article-container blockquote {
+  border-left: 2px solid var(--t-accent);
+  background: var(--t-accent-soft);
+  border-radius: 0 8px 8px 0;
+  color: var(--t-text-soft);
+}
+
+/* 表格：细线 + 等宽表头 */
+#article-container table thead {
+  background: var(--t-panel-deep);
+}
+
+#article-container table th,
+#article-container table td {
+  border-color: var(--t-line);
+}
+
+#article-container table th {
+  font-family: var(--t-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--t-accent);
+}
+
+#article-container hr:before {
+  color: var(--t-line-strong);
+}
+
+/* 行内代码 */
+#article-container code:not([class*='language-']) {
+  font-family: var(--t-mono);
+  font-size: 0.88em;
+  background: var(--t-panel-deep);
+  border: 1px solid var(--t-line);
+  border-radius: 4px;
+  color: var(--t-accent);
+}
+
+/* 代码块 */
+#article-container figure.highlight,
+#article-container pre {
+  background: var(--t-panel-deep);
+  border: 1px solid var(--t-line);
+  border-radius: 8px;
+}
+
+#article-container figure.highlight {
+  margin: 0 0 20px;
+}
+
+#article-container figure.highlight pre,
+#article-container figure.highlight code {
+  font-family: var(--t-mono);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 代码块工具栏（macStyle 圆点由主题生成） */
+figure.highlight .highlight-tools {
+  background: var(--t-panel-deep);
+  border-bottom: 1px solid var(--t-line);
+  color: var(--t-dim);
+  font-family: var(--t-mono);
+  font-size: 12px;
+}
+
+figure.highlight .highlight-tools .code-lang {
+  font-family: var(--t-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--t-accent);
+}
+
+figure.highlight .highlight-tools .copy-button:hover {
+  color: var(--t-accent);
+}
+
+figure.highlight .line.marked {
+  background: var(--t-accent-soft);
+}
+
+/* --------------------------------------------------------------------------
+   8. 侧栏卡片
+   -------------------------------------------------------------------------- */
+#aside-content .card-widget {
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  border-radius: 10px;
+  box-shadow: none;
+  transition: border-color 0.25s ease;
+}
+
+#aside-content .card-widget:hover {
+  border-color: var(--t-line-strong);
+}
+
+/* 卡片标题：等宽小标签 + 细线 */
+#aside-content .card-widget .item-headline {
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--t-line);
+  font-family: var(--t-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--t-dim);
+  animation: none;
+}
+
+#aside-content .card-widget .item-headline i {
+  color: var(--t-accent);
+  font-size: 12px;
+  animation: none;
+}
+
+#aside-content .card-widget .item-headline span {
+  margin-left: 7px;
+}
+
+/* 作者卡片 */
+#aside-content .card-info .avatar-img {
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+  border: 1px solid var(--t-line-strong);
+  padding: 3px;
+  background: var(--t-panel-deep);
+}
+
+#aside-content .card-info .author-info-name {
+  font-family: var(--t-mono);
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--t-text-bright);
+}
+
+#aside-content .card-info .author-info-description {
+  font-size: 13px;
+  color: var(--t-dim);
+}
+
+#aside-content .card-info .site-data a {
+  border-right: 1px solid var(--t-line) !important;
+}
+
+#aside-content .card-info .site-data .headline {
+  font-family: var(--t-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--t-dim);
+}
+
+#aside-content .card-info .site-data .length-num {
+  font-family: var(--t-mono);
+  font-size: 18px;
+  color: var(--t-accent);
+}
+
+#card-info-btn {
+  background: transparent !important;
+  border: 1px solid var(--t-line-strong);
+  border-radius: 8px;
+  font-family: var(--t-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--t-text-soft) !important;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#card-info-btn:hover {
+  border-color: var(--t-accent);
+  color: var(--t-accent) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -14px var(--t-accent-glow);
+}
+
+#aside-content .card-info .card-info-social-icons .social-icon {
+  color: var(--t-dim);
+}
+
+#aside-content .card-info .card-info-social-icons .social-icon:hover {
+  color: var(--t-accent);
+}
+
+/* 侧栏列表（最新/分类/标签/归档） */
+#aside-content .aside-list > .aside-list-item .content > .title,
+#aside-content .aside-list > .aside-list-item .content > .name {
+  font-size: 13.5px;
+}
+
+#aside-content .aside-list > .aside-list-item .content > .title:hover,
+#aside-content .aside-list > .aside-list-item .content > .name:hover {
+  color: var(--t-accent);
+}
+
+#aside-content .aside-list > .aside-list-item .content > time {
+  font-family: var(--t-mono);
+  font-size: 11px;
+  color: var(--t-dim);
+}
+
+#aside-content .card-categories .card-category-list-item a,
+#aside-content .card-archives .card-archive-list-item a {
+  font-family: var(--t-mono);
+  font-size: 12.5px;
+  color: var(--t-text-soft);
+}
+
+#aside-content .card-categories .card-category-list-item a:hover,
+#aside-content .card-archives .card-archive-list-item a:hover {
+  color: var(--t-accent);
+}
+
+/* 标签云：主题会写内联 color / font-size，这里用 !important 收回控制权 */
+#aside-content .card-tag-cloud {
+  font-size: 11px;
+}
+
+#aside-content .card-tag-cloud a {
+  font-family: var(--t-mono);
+  border: 1px solid var(--t-line);
+  border-radius: 999px;
+  padding: 2px 9px;
+  margin: 0 6px 8px 0;
+  color: var(--t-text-soft) !important;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+#aside-content .card-tag-cloud a:hover,
+#aside-content .card-tag-cloud a.tags-cloud-item-active {
+  background: var(--t-accent) !important;
+  border-color: var(--t-accent);
+  color: var(--t-on-accent) !important;
+}
+
+#aside-content .card-webinfo .webinfo-item {
+  font-family: var(--t-mono);
+  font-size: 12px;
+  color: var(--t-dim);
+}
+
+/* --------------------------------------------------------------------------
+   9. 仿终端窗口组件（侧栏）
+   -------------------------------------------------------------------------- */
+.term-window {
+  border: 1px solid var(--t-line);
+  border-radius: 10px;
+  background: var(--t-panel-deep);
+  overflow: hidden;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: rgba(127, 127, 127, 0.08);
+  border-bottom: 1px solid var(--t-line);
+}
+
+.term-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.term-dot-r {
+  background: var(--t-dot-r);
+}
+
+.term-dot-y {
+  background: var(--t-dot-y);
+}
+
+.term-dot-g {
+  background: var(--t-dot-g);
+}
+
+.term-title {
+  margin-left: 6px;
+  font-family: var(--t-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--t-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.term-body {
+  padding: 12px 12px 14px;
+  font-family: var(--t-mono);
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--t-text-soft);
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.term-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+  opacity: 0;
+  animation: term-in 0.36s ease-out forwards;
+  animation-delay: calc(var(--i, 0) * 0.13s);
+}
+
+.term-line--out {
+  color: var(--t-dim);
+  padding-left: 2px;
+}
+
+.term-prompt .p-user {
+  color: var(--t-accent);
+  font-weight: 700;
+}
+
+.term-prompt .p-host {
+  color: var(--t-accent);
+  font-weight: 700;
+}
+
+.term-prompt .p-path {
+  color: var(--t-path);
+  font-weight: 700;
+}
+
+.term-prompt .p-sign {
+  color: var(--t-dim);
+  margin-right: 6px;
+}
+
+.term-cmd {
+  color: var(--t-text-bright);
+}
+
+.term-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  margin-left: 2px;
+  background: var(--t-accent);
+  vertical-align: -2px;
+  animation: term-blink 1.05s steps(1) infinite;
+}
+
+@keyframes term-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes term-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. 分页 / 相关文章
+   -------------------------------------------------------------------------- */
+#pagination .page-number,
+#pagination .extend {
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  border-radius: 8px;
+  font-family: var(--t-mono);
+  font-size: 12.5px;
+  color: var(--t-text-soft);
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+#pagination .page-number:hover,
+#pagination .extend:hover {
+  border-color: var(--t-accent);
+  color: var(--t-accent);
+}
+
+#pagination .page-number.current {
+  background: var(--t-accent);
+  border-color: var(--t-accent);
+  color: var(--t-on-accent);
+}
+
+#pagination.pagination-post .pagination-related {
+  border: 1px solid var(--t-line);
+  border-radius: 10px;
+  background: var(--t-panel);
+}
+
+#pagination.pagination-post .pagination-related:hover {
+  border-color: var(--t-accent);
+}
+
+#pagination.pagination-post .pagination-related .info-item-1 {
+  font-family: var(--t-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--t-dim);
+}
+
+/* --------------------------------------------------------------------------
+   11. 右侧快捷按钮
+   -------------------------------------------------------------------------- */
+#rightside > div > button,
+#rightside > div > a {
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  border-radius: 8px;
+  color: var(--t-text-soft);
+  box-shadow: none;
+  transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+#rightside > div > button:hover,
+#rightside > div > a:hover {
+  background: var(--t-panel);
+  border-color: var(--t-accent);
+  color: var(--t-accent);
+  transform: translateY(-2px);
+}
+
+#rightside #go-up .scroll-percent {
+  font-family: var(--t-mono);
+  font-size: 10px;
+  color: var(--t-accent);
+}
+
+#rightside #rightside-config-hide.show + #rightside-config-show {
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   12. 页脚
+   -------------------------------------------------------------------------- */
+#footer {
+  background: transparent;
+  border-top: 1px solid var(--t-line);
+  color: var(--t-dim);
+}
+
+#footer .footer-other,
+#footer .copyright,
+#footer .framework-info {
+  font-family: var(--t-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+}
+
+#footer a {
+  color: var(--t-text-soft);
+}
+
+#footer a:hover {
+  color: var(--t-accent);
+}
+
+#footer .footer-separator {
+  color: var(--t-line-strong);
+}
+
+.footer_custom_text {
+  margin-top: 6px;
+}
+
+.footer_custom_text .term-status {
+  font-family: var(--t-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--t-dim);
+}
+
+.footer_custom_text .term-status em {
+  font-style: normal;
+  color: var(--t-accent);
+  text-shadow: 0 0 10px var(--t-accent-glow);
+}
+
+/* --------------------------------------------------------------------------
+   13. 目录 / 搜索 / 标签页
+   -------------------------------------------------------------------------- */
+#card-toc .toc-link,
+#card-toc .toc-link.active {
+  font-family: var(--t-mono);
+}
+
+#card-toc .toc-content .toc-link.active {
+  color: var(--t-accent);
+}
+
+#local-search .search-dialog {
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  border-radius: 12px;
+}
+
+#local-search .search-nav {
+  border-bottom: 1px solid var(--t-line);
+  font-family: var(--t-mono);
+}
+
+#local-search .search-nav .search-nav-close:hover {
+  color: var(--t-accent);
+}
+
+#local-search .search-input {
+  font-family: var(--t-mono);
+  font-size: 13px;
+}
+
+#local-search .search-result .search-result-title {
+  font-weight: 600;
+}
+
+#local-search .search-result .search-result-title em,
+#local-search .search-keyword {
+  color: var(--t-accent);
+}
+
+#aside-content .card-tags .card-tag-cloud a,
+.tag-cloud-list a,
+.category-lists a,
+.article-sort-item-title,
+#page .category-lists .category-list a,
+#page .tag-cloud-list a {
+  font-family: var(--t-mono);
+}
+
+.tag-cloud-list a,
+.category-content .category-list a,
+#page .category-lists .category-list a {
+  border: 1px solid var(--t-line);
+  border-radius: 999px;
+  padding: 3px 11px;
+  color: var(--t-text-soft);
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.tag-cloud-list a:hover,
+.category-content .category-list a:hover,
+#page .category-lists .category-list a:hover {
+  background: var(--t-accent-soft) !important;
+  border-color: var(--t-accent);
+  color: var(--t-accent) !important;
+}
+
+/* 归档页 */
+.article-sort-item:before {
+  background: var(--t-line);
+}
+
+.article-sort-item:hover:before {
+  background: var(--t-accent);
+  box-shadow: 0 0 10px var(--t-accent-glow);
+}
+
+.article-sort-item-time time,
+.article-sort-item .article-sort-item-time {
+  font-family: var(--t-mono);
+  font-size: 11.5px;
+  color: var(--t-dim);
+}
+
+/* 文章正文容器与版权/打赏 */
+#post .post-copyright {
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+}
+
+#post .post-copyright:before {
+  background: var(--t-accent);
+}
+
+#post .post-copyright .post-copyright-meta,
+#post .post-copyright .post-copyright-info {
+  font-family: var(--t-mono);
+  font-size: 12.5px;
+  color: var(--t-text-soft);
+}
+
+[data-theme='dark'] #post-comment .comment-head {
+  background: var(--t-panel);
+}
+
+/* 加载动画 */
+#loading-box .loading-img {
+  filter: hue-rotate(60deg) saturate(0.8);
+}
+
+/* --------------------------------------------------------------------------
+   14. 无障碍：尊重降低动效偏好
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  #bg-canvas {
+    display: none;
+  }
+
+  .term-line {
+    opacity: 1;
+    animation: none;
+  }
+
+  .term-cursor {
+    animation: none;
+  }
+
+  #recent-posts .recent-post-item,
+  #recent-posts .recent-post-item:hover,
+  #rightside > div > button,
+  #rightside > div > a {
+    transform: none;
+  }
+
+  #nav #menus .menus_item > a.site-page:after {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. 移动端微调
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  #site-title::before {
+    margin-right: 8px;
+  }
+
+  #article-container {
+    font-size: 15px;
+  }
+
+  .term-body {
+    font-size: 11.5px;
+    max-height: 300px;
+  }
+}
