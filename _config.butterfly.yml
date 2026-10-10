@@ -223,10 +223,11 @@ structured_data:
 footer:
   custom_text: '<span class="term-status">SYSTEM STATUS: <em>ONLINE</em></span>'
 
-# 终端风皮肤：自定义样式表 + 背景字符雨脚本
+# 终端风皮肤：自定义样式表 + 背景代码流 + 首页 hero 增强
 # 注意：这里的路径包含站点 root（/xzmxj/），若仓库改名需同步修改
 inject:
   head:
     - <link rel="stylesheet" href="/xzmxj/css/terminal.css">
   bottom:
     - <script src="/xzmxj/js/terminal-bg.js" defer></script>
+    - <script src="/xzmxj/js/hero-glow.js" defer></script>
