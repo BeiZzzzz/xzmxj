@@ -223,11 +223,15 @@ structured_data:
 footer:
   custom_text: '<span class="term-status">SYSTEM STATUS: <em>ONLINE</em></span>'
 
-# 终端风皮肤：自定义样式表 + 背景代码流 + 首页 hero 增强
-# 注意：这里的路径包含站点 root（/xzmxj/），若仓库改名需同步修改
+# 终端风皮肤：自定义样式表 + 背景命令流 + 首页 hero 增强
+# 注意 1：这里的路径包含站点 root（/xzmxj/），若仓库改名需同步修改
+# 注意 2：?v= 是缓存版本号。这三个资源是固定文件名，GitHub Pages 会返回
+#         Cache-Control: max-age=600，浏览器在缓存期内不会重新拉取，
+#         导致改动"看起来没生效"。每次改动这三个文件后，请递增此版本号，
+#         浏览器就会立即获取新版本。
 inject:
   head:
-    - <link rel="stylesheet" href="/xzmxj/css/terminal.css">
+    - <link rel="stylesheet" href="/xzmxj/css/terminal.css?v=20261013">
   bottom:
-    - <script src="/xzmxj/js/terminal-bg.js" defer></script>
-    - <script src="/xzmxj/js/hero-glow.js" defer></script>
+    - <script src="/xzmxj/js/terminal-bg.js?v=20261013" defer></script>
+    - <script src="/xzmxj/js/hero-glow.js?v=20261013" defer></script>
