@@ -1213,18 +1213,20 @@ figure.highlight .line.marked {
     0 0 36px var(--glow-2), 0 12px 30px -16px var(--glow-3);
 }
 
-/* 头像下方的「心路历程」入口（点击进入关于页） */
+/* 头像下方的「心路历程」入口（点击进入关于页）
+   hero 的主入口，尺寸要压得住场，所以字号和内边距都给得比较大 */
 #site-info .hero-journey {
   display: block;
   width: fit-content;
-  margin: 0 auto 16px;
-  padding: 5px 15px;
+  margin: 0 auto 20px;
+  padding: 11px 30px;
   border: 1px solid var(--t-line-strong);
   border-radius: 999px;
   background: var(--t-panel-deep);
   font-family: var(--t-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   color: var(--t-text-soft);
   text-decoration: none;
   transition: border-color 0.25s ease, color 0.25s ease,
@@ -1235,7 +1237,7 @@ figure.highlight .line.marked {
   border-color: var(--t-accent);
   color: var(--t-accent);
   transform: translateY(-2px);
-  box-shadow: 0 0 16px var(--t-accent-glow), 0 8px 22px -14px var(--t-accent-glow);
+  box-shadow: 0 0 22px var(--t-accent-glow), 0 10px 26px -14px var(--t-accent-glow);
 }
 
 #site-info .hero-journey .hj-arrow {
@@ -1501,5 +1503,65 @@ html[data-theme='light'] #site-info #site-title:hover {
 @media (prefers-reduced-motion: reduce) {
   .tl-item--now::before {
     animation: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   20. 首页 hero：左右两栏（左＝头像 + 心路历程 + 标题，右＝仿终端窗口）
+   布局参考 n0ther3.github.io 首页：左侧个人区，右侧终端。
+   -------------------------------------------------------------------------- */
+/* 内容变高后改用垂直居中，避免短屏溢出 */
+#page-header.full_page #site-info {
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 24px;
+}
+
+#site-info .hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr);
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+#site-info .hero-left,
+#site-info .hero-right {
+  min-width: 0;
+}
+
+/* hero 里的终端窗口比原来侧栏那份更宽更高，作为右侧主视觉 */
+#site-info .hero-right .term-window {
+  box-shadow: 0 26px 64px -44px rgba(0, 0, 0, 0.95);
+}
+
+#site-info .hero-right .term-body {
+  max-height: 420px;
+  font-size: 12.5px;
+}
+
+@media screen and (max-width: 900px) {
+  #page-header.full_page #site-info {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #site-info .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    max-width: 560px;
+  }
+
+  #site-info .hero-right .term-body {
+    max-height: 300px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #site-info .hero-journey {
+    font-size: 15px;
+    padding: 9px 22px;
   }
 }

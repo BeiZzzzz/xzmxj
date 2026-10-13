@@ -1,24 +1,3 @@
-top:
-  - class_name: card-widget card-terminal
-    id_name: card-terminal
-    icon: fas fa-terminal
-    name: TERMINAL
-    html: |
-      <div class="term-window">
-        <div class="term-bar">
-          <span class="term-dot term-dot-r"></span><span class="term-dot term-dot-y"></span><span class="term-dot term-dot-g"></span>
-          <span class="term-title">bei@xzmxj: ~</span>
-        </div>
-        <div class="term-body">
-          <div class="term-line term-prompt" style="--i:0"><span class="p-user">bei</span><span class="p-host">@xzmxj</span><span class="p-path">:~</span><span class="p-sign">$</span><span class="term-cmd">whoami</span></div>
-          <div class="term-line term-line--out" style="--i:1">小镇梦想家 · 安全学习者</div>
-          <div class="term-line term-prompt" style="--i:2"><span class="p-user">bei</span><span class="p-host">@xzmxj</span><span class="p-path">:~</span><span class="p-sign">$</span><span class="term-cmd">cat README.md</span></div>
-          <div class="term-line term-line--out" style="--i:3">记录技术笔记与安全学习，构建自己的知识栈。</div>
-          <div class="term-line term-prompt" style="--i:4"><span class="p-user">bei</span><span class="p-host">@xzmxj</span><span class="p-path">:~</span><span class="p-sign">$</span><span class="term-cmd">ls ~/categories</span></div>
-          <div class="term-line term-line--out" style="--i:5">CTF各类比赛/&nbsp;&nbsp;&nbsp;网络渗透课程/&nbsp;&nbsp;SRC与渗透测试/&nbsp;&nbsp;随笔/</div>
-          <div class="term-line term-prompt" style="--i:6"><span class="p-user">bei</span><span class="p-host">@xzmxj</span><span class="p-path">:~</span><span class="p-sign">$</span><span class="term-cmd">./status.sh</span></div>
-          <div class="term-line term-line--out" style="--i:7">[SYS]&nbsp;&nbsp;站点状态 ......... ONLINE</div>
-          <div class="term-line term-line--out" style="--i:8">[ENV]&nbsp;&nbsp;Hexo + Butterfly</div>
-          <div class="term-line term-prompt" style="--i:9"><span class="p-user">bei</span><span class="p-host">@xzmxj</span><span class="p-path">:~</span><span class="p-sign">$</span><span class="term-cursor"></span></div>
-        </div>
-      </div>
+# 侧栏自定义卡片
+# 原本这里放的是仿终端窗口卡片；现已移到首页 hero 右侧，
+# 与左侧的头像 / 心路历程组成左右两栏（见 source/js/hero-glow.js）。
