@@ -231,7 +231,7 @@ footer:
 #         浏览器就会立即获取新版本。
 inject:
   head:
-    - <link rel="stylesheet" href="/xzmxj/css/terminal.css?v=20261013">
+    - <link rel="stylesheet" href="/xzmxj/css/terminal.css?v=20261013-2">
   bottom:
-    - <script src="/xzmxj/js/terminal-bg.js?v=20261013" defer></script>
-    - <script src="/xzmxj/js/hero-glow.js?v=20261013" defer></script>
+    - <script src="/xzmxj/js/terminal-bg.js?v=20261013-2" defer></script>
+    - <script src="/xzmxj/js/hero-glow.js?v=20261013-2" defer></script>

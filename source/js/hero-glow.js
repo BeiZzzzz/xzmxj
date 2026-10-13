@@ -2,6 +2,7 @@
  * 小镇梦想家 · 首页 hero 增强
  * 1) 在站点标题上方插入圆形头像，点击进入「关于」页
  * 2) 头像与标题悬停时产生随机配色的渐变辉光
+ * 3) 头像下方插入「心路历程」入口，点击进入关于页的时间线
  * 只作用于首页的 #site-info，其他页面不受影响。
  */
 (function () {
@@ -31,6 +32,16 @@
 
     link.appendChild(img);
     info.insertBefore(link, title);
+  }
+
+  // ---- 心路历程入口：放在头像与标题之间，同样进入关于页 ----
+  if (!info.querySelector('.hero-journey')) {
+    var chip = document.createElement('a');
+    chip.className = 'hero-journey';
+    chip.href = ABOUT_PATH;
+    chip.title = '关于我 · 心路历程';
+    chip.innerHTML = '心路历程 <span class="hj-arrow">&rsaquo;</span>';
+    info.insertBefore(chip, title);
   }
 
   var avatar = info.querySelector('.hero-avatar');

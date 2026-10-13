@@ -1213,6 +1213,41 @@ figure.highlight .line.marked {
     0 0 36px var(--glow-2), 0 12px 30px -16px var(--glow-3);
 }
 
+/* 头像下方的「心路历程」入口（点击进入关于页） */
+#site-info .hero-journey {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 16px;
+  padding: 5px 15px;
+  border: 1px solid var(--t-line-strong);
+  border-radius: 999px;
+  background: var(--t-panel-deep);
+  font-family: var(--t-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--t-text-soft);
+  text-decoration: none;
+  transition: border-color 0.25s ease, color 0.25s ease,
+    box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+#site-info .hero-journey:hover {
+  border-color: var(--t-accent);
+  color: var(--t-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px var(--t-accent-glow), 0 8px 22px -14px var(--t-accent-glow);
+}
+
+#site-info .hero-journey .hj-arrow {
+  display: inline-block;
+  color: var(--t-accent);
+  transition: transform 0.25s ease;
+}
+
+#site-info .hero-journey:hover .hj-arrow {
+  transform: translateX(3px);
+}
+
 #site-info #site-title {
   --glow-1: #c9e894;
   --glow-2: #8ab4ff;
@@ -1284,4 +1319,187 @@ html[data-theme='light'] #site-info #site-title:hover {
   background-size: auto, auto, auto !important;
   background-position: center center !important;
   background-repeat: no-repeat, repeat, repeat !important;
+}
+
+/* --------------------------------------------------------------------------
+   19. 关于页：竖向时间线（心路历程）
+   -------------------------------------------------------------------------- */
+.tl {
+  position: relative;
+  margin: 16px 0 4px;
+}
+
+/* 竖向主轴：两端淡出 */
+.tl::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--t-line-strong) 7%,
+    var(--t-line-strong) 93%,
+    transparent
+  );
+}
+
+.tl-item {
+  position: relative;
+  padding: 0 0 28px 30px;
+}
+
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+
+/* 时间点圆点，居中压在主轴上 */
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--t-accent);
+  background: var(--t-panel-deep);
+  box-shadow: 0 0 0 3px var(--t-panel), 0 0 10px var(--t-accent-glow);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tl-item:hover::before {
+  background: var(--t-accent);
+}
+
+/* 里程碑节点：实心点 + 更强的光 */
+.tl-item--mark::before {
+  background: var(--t-accent);
+  box-shadow: 0 0 0 3px var(--t-panel), 0 0 15px var(--t-accent-glow);
+}
+
+/* 最新节点：空心大一点，表示仍在进行 */
+.tl-item--now::before {
+  width: 11px;
+  height: 11px;
+  left: 0;
+  top: 5px;
+  border-color: var(--t-accent);
+  box-shadow: 0 0 0 3px var(--t-panel), 0 0 16px var(--t-accent-glow);
+  animation: tl-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes tl-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px var(--t-panel), 0 0 10px var(--t-accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 0 3px var(--t-panel), 0 0 20px var(--t-accent-glow);
+  }
+}
+
+.tl-date {
+  display: inline-block;
+  margin-bottom: 7px;
+  padding: 1px 9px;
+  border: 1px solid var(--t-line);
+  border-radius: 999px;
+  background: var(--t-accent-soft);
+  font-family: var(--t-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  color: var(--t-accent);
+}
+
+.tl-title {
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--t-text-bright);
+}
+
+.tl-desc {
+  font-size: 14.5px;
+  line-height: 1.9;
+  color: var(--t-text-soft);
+}
+
+/* 配图：默认竖图并排，is-wide 的横图占满整行 */
+.tl-media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.tl-shot {
+  flex: 1 1 220px;
+  max-width: 420px;
+  margin: 0 !important;
+}
+
+.tl-shot.is-tall {
+  flex: 1 1 220px;
+  max-width: 420px;
+}
+
+.tl-shot.is-wide {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
+.tl-shot img {
+  display: block;
+  width: 100%;
+  margin: 0 !important;
+  border: 1px solid var(--t-line);
+  border-radius: 8px;
+  background: var(--t-panel-deep);
+  transition: border-color 0.25s ease, transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.tl-shot:hover img {
+  border-color: var(--t-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -20px var(--t-accent-glow);
+}
+
+.tl-shot figcaption {
+  margin-top: 6px;
+  padding: 0;
+  font-family: var(--t-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--t-dim);
+}
+
+@media screen and (max-width: 768px) {
+  .tl-item {
+    padding-left: 26px;
+  }
+
+  .tl-title {
+    font-size: 15.5px;
+  }
+
+  .tl-desc {
+    font-size: 14px;
+  }
+
+  .tl-shot,
+  .tl-shot.is-tall {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-item--now::before {
+    animation: none;
+  }
 }
