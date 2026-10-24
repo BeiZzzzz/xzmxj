@@ -209,7 +209,7 @@ instantpage: true
 
 lazyload:
   enable: true
-  native: false
+  native: true
   field: site
   blur: true
 
